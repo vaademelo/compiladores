@@ -47,10 +47,15 @@ Token* get_next_token(void) {
       buffer_size_counter++;
     } else {
       buffer[buffer_size_counter] = '\0';
-      token->class = 1;
+      token->class = classify_token(previous_state, current_state, buffer);
       strcpy(token->value, buffer);
       fsetpos(input_file, &cursor_previous_position);
-      return token;
+      if (token->class == 5) {
+        return get_next_token();
+      } else {
+        return token;
+      }
+
     }
 
     // if (current_state == 0 && previous_state != 0 && !is_layout_char(ch)) {
@@ -59,4 +64,6 @@ Token* get_next_token(void) {
     // }
 
   } while ( ch != EOF);
+
+  return NULL;
 }
