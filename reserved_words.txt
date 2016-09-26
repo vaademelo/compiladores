@@ -1,0 +1,14 @@
+if
+else
+int
+bool
+string
+while
+switch
+case
+break
+default
+function
+return
+typedef
+ref
