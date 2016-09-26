@@ -1,33 +1,6 @@
 #include <stdio.h>
 #include "lex.h"
-
-void print_matrix (int matrix[MAX_NEXT_STATE_TABLE][MAX_NEXT_STATE_TABLE], int cols, int rows) {
-  int i, j;
-
-  for (j = 0 ; j < cols ; j++) {
-    for (i = 0 ; i < rows ; i++) {
-      printf("[%d] ", matrix[i][j]);
-    }
-    printf("\n");
-  }
-}
-
-void setup_next_state_table (int next_state_table[MAX_NEXT_STATE_TABLE][MAX_NEXT_STATE_TABLE]) {
-  int i, j;
-  int cols, rows;
-
-  FILE *next_state_table_file;
-  next_state_table_file = fopen("next_state.txt", "r");
-
-  fscanf(next_state_table_file, "%d %d", &cols, &rows);
-  printf("\n\n%d %d\n\n", cols, rows);
-
-  for (i = 0 ; i < rows ; i++) {
-    for (j = 0 ; j < cols ; j++) {
-      fscanf(next_state_table_file, "%d", &next_state_table[i][j]);
-    }
-  }
-}
+#include "next_state.h"
 
 int get_character_group (int character) {
   if (character >= 97 && character <= 122) {
@@ -61,8 +34,7 @@ int get_character_group (int character) {
   }
 }
 
-int get_next_state(int character, int current_state, int next_state_table[MAX_NEXT_STATE_TABLE][MAX_NEXT_STATE_TABLE]) {
+int get_next_state(int character, int current_state) {
   int character_received_group = get_character_group(character);
-
   return next_state_table[current_state][character_received_group];
 }

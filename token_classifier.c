@@ -1,8 +1,8 @@
-#include "classifier.h"
+#include "token_classifier.h"
 
 int classify_token(int previous_state, int current_state) {
   if (previous_state == 2) {
-    return classify_identifier(); // identifier
+    return 0; // identifier
   } else if (previous_state == 3 || previous_state == 4) {
     return 1; // numero
   } else if (previous_state == 1 ||
@@ -18,4 +18,5 @@ int classify_token(int previous_state, int current_state) {
              previous_state == 14) {
     return 2; // simbolos especiais
   }
+  return 0;
 }

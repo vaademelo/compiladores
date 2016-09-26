@@ -1,50 +1,62 @@
 #include <stdio.h>
+#include <stdbool.h>
+#include <stdlib.h>
+#include <string.h>
 #include "lex.h"
 #include "next_state.h"
-#include "classifier.h"
+#include "token_classifier.h"
 
-void initialize_buffer(int buffer[MAX_BUFFER_SIZE]) {
-  int i;
+FILE *input_file;
+fpos_t cursor_current_position;
+fpos_t cursor_previous_position;
 
-  for (i = 0 ; i < MAX_BUFFER_SIZE ; i++) {
-    buffer[i] = -1;
-  }
+int next_state_table[MAX_NEXT_STATE_TABLE_SIZE][MAX_NEXT_STATE_TABLE_SIZE];
+
+bool is_layout_char(int character) {
+  return (character == 32 || // space
+          character == 9  || // tab
+          character == 10 || // new line
+          character == 13);  // carriage return
 }
 
-void get_next_token(void) {
-
+Token* get_next_token(void) {
+  Token *token;
   int current_state = 0;
   int previous_state = -1;
+  int ch, lookahead;
 
-  int ch;
-  int buffer[MAX_BUFFER_SIZE];
+  char buffer[MAX_TOKEN_VALUE_SIZE];
+  int buffer_size_counter = 0;
 
-  int next_state_table[MAX_NEXT_STATE_TABLE][MAX_NEXT_STATE_TABLE];
-  setup_next_state_table(next_state_table);
+  token = (Token*)malloc(sizeof(Token));
 
-  printf("\n\n[%d]\n\n", next_state_table[9][5]);
+  do {
+    fgetpos(input_file, &cursor_previous_position);
 
-  // ch = getchar();
-  // printf("Codigo ASCII: %d\n", ch);
-  // printf("Caracter: %c\n", ch);
-  // printf("Estado atual: %d\n", current_state);
-  // printf("Proximo estado: %d\n", get_next_state(ch, current_state, next_state_table));
+    ch = getc(input_file);
 
-
-  FILE *input_file;
-  input_file = fopen("input.txt", "r");
-
-  while ((ch = getc(input_file)) != EOF) {
-
-    previous_state = current_state;
-    current_state = get_next_state(ch, current_state, next_state_table);
-
-    if (current_state == 0 && previous_state != 0) {
-      classify_token(buffer);
+    if (buffer_size_counter == 0 && is_layout_char(ch)){
+      continue;
     }
 
-  }
+    previous_state = current_state;
+    current_state = get_next_state(ch, current_state);
 
-  fclose(input_file);
+    if (current_state != 0) {
+      buffer[buffer_size_counter] = ch;
+      buffer_size_counter++;
+    } else {
+      buffer[buffer_size_counter] = '\0';
+      token->class = 1;
+      strcpy(token->value, buffer);
+      fsetpos(input_file, &cursor_previous_position);
+      return token;
+    }
 
+    // if (current_state == 0 && previous_state != 0 && !is_layout_char(ch)) {
+    //   lookahead = ch;
+    //   // classify_token(buffer);
+    // }
+
+  } while ( ch != EOF);
 }
