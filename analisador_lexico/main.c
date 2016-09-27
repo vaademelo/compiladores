@@ -9,7 +9,6 @@ int main(void) {
   while(1) {
     token = get_next_token();
     printf("[Classe: %d, Valor: %s]\n", token->class, token->value);
-    getchar();
   }
   return 0;
 }

@@ -1,0 +1,13 @@
+int valor = 128;
+float variavel = 0.93;
+
+// Comentario de uma linha
+if (valor == 27) {
+	valor = 0;
+}
+
+/* comentario de mais
+de uma linha */
+while (valor != 2 && teste > 10) {
+	variavel = variavel + 1.07; // Comentario no fim da linha
+}

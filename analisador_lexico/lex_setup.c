@@ -16,7 +16,6 @@ void setup_next_state_table(void) {
   next_state_table_file = fopen("setup_files/next_state.txt", "r");
 
   fscanf(next_state_table_file, "%d %d", &cols, &rows);
-  printf("\n\n%d %d\n\n", cols, rows);
 
   for (i = 0 ; i < rows ; i++) {
     for (j = 0 ; j < cols ; j++) {
