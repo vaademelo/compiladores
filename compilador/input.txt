@@ -1,0 +1,37 @@
+deftipo registro {
+  caracter autor[50];
+  caracter titulo[50];
+  inteiro   idLivro;
+} Livro;
+
+func imprimeAutor(livro:Livro):vazio {
+ imprimir(livro.autor);
+ imprimir2(livro.autor);
+}
+
+func principal():vazio {
+  seja i um inteiro;
+  seja hhgttg um Livro;
+  seja fundacao um Livro;
+
+
+  torne fundacao.autor := "Isaac Asimov";
+  torne fundacao.titulo := "Fundacao";
+  torne fundacao.idLivro := 1;
+
+  torne hhgttg.autor := "Douglas Adams";
+  torne hhgttg.titulo := "Guia do mochileiro das galáxias";
+  torne hhgttg.idLivro := 42;
+
+
+  torne i := 0;
+  enquanto (i < 10) {
+    se (i%2 == 0) {
+      imprimir(fundacao);
+    }
+		senaose (i%2 == 0) {
+      imprimir(hhgttg);
+    }
+    torne i := i + 1;
+  }
+}

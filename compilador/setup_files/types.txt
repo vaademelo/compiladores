@@ -1,0 +1,5 @@
+4
+inteiro
+caracter
+flutuante
+string

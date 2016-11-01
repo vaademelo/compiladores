@@ -1,5 +1,0 @@
-4
-int
-bool
-float
-string

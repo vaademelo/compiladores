@@ -50,7 +50,7 @@ Token* get_next_token(void) {
       token->class = classify_token(previous_state, current_state, buffer);
       strcpy(token->value, buffer);
       fsetpos(input_file, &cursor_previous_position);
-      if (token->class == 5) {
+      if (token->class == 0) {
         return get_next_token();
       } else {
         return token;
