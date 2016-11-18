@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
@@ -81,7 +82,7 @@ bool is_accepting_state(Machine *machine, int state) {
 
   switch (machine->id) {
     case P_MACHINE:
-      while(p->accepting_states[i] > 0){
+      while(p->accepting_states[i] > 0) {
         if (state == p->accepting_states[i]) {
           return true;
         }
@@ -142,7 +143,12 @@ void next_state_exp_a_machine(Token *token) {
   if (is_accepting_state(current_machine, current_state) && stack_pointer > 0) {
     pop_machine();
     machine_popped = true;
+
+    return;
   }
+
+  printf("Erro sintatico [%d:%d] - token '%s' inesperado.\n\n", token->line, token->column, token->value);
+  exit(0);
 }
 
 void next_state_exp_b_machine(Token *token) {
@@ -179,7 +185,12 @@ void next_state_exp_b_machine(Token *token) {
   if (is_accepting_state(current_machine, current_state) && stack_pointer > 0) {
     pop_machine();
     machine_popped = true;
+
+    return;
   }
+
+  printf("Erro sintatico [%d:%d] - token '%s' inesperado.\n\n", token->line, token->column, token->value);
+  exit(0);
 
 }
 
@@ -228,7 +239,12 @@ void next_state_cmd_machine(Token *token) {
   if (is_accepting_state(current_machine, current_state) && stack_pointer > 0) {
     pop_machine();
     machine_popped = true;
+
+    return;
   }
+
+  printf("Erro sintatico [%d:%d] - token '%s' inesperado.\n\n", token->line, token->column, token->value);
+  exit(0);
 }
 
 
@@ -257,7 +273,12 @@ void next_state_p_machine(Token *token) {
   if (is_accepting_state(current_machine, current_state) && stack_pointer > 0) {
     pop_machine();
     machine_popped = true;
+
+    return;
   }
+
+  printf("Erro sintatico [%d:%d] - token '%s' inesperado.\n\n", token->line, token->column, token->value);
+  exit(0);
 }
 
 void next_state(Token *token) {
@@ -295,12 +316,11 @@ void syntactic_analysis(void) {
   change_machine(P_MACHINE, 0);
 
   while(1) {
-    if (is_accepting_state(current_machine, current_state) && stack_pointer == 0) {
-      return;
-    }
+    // if (is_accepting_state(current_machine, current_state) && stack_pointer == 0) {
+    //   return;
+    // }
 
     token = get_next_token();
-
     next_state(token);
 
     preserve_token_on_pop(token);

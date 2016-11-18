@@ -6,7 +6,7 @@ deftipo registro {
 
 func imprimeAutor(livro:Livro):vazio {
  imprimir(livro.autor);
- imprimir2(livro.autor);
+ imprimir(livro.titulo);
 }
 
 func principal():vazio {
