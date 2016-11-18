@@ -147,7 +147,9 @@ void next_state_exp_a_machine(Token *token) {
     return;
   }
 
-  printf("Erro sintatico [%d:%d] - token '%s' inesperado.\n\n", token->line, token->column, token->value);
+  printf("\n\n** Erro Sintatico **\n");
+  printf("--------------------\n");
+  printf("input.txt[%d:%d] ~> Token '%s' inesperado.\n\n", token->line, token->column, token->value);
   exit(0);
 }
 
@@ -189,7 +191,9 @@ void next_state_exp_b_machine(Token *token) {
     return;
   }
 
-  printf("Erro sintatico [%d:%d] - token '%s' inesperado.\n\n", token->line, token->column, token->value);
+  printf("\n\n** Erro Sintatico **\n");
+  printf("--------------------\n");
+  printf("input.txt[%d:%d] ~> Token '%s' inesperado.\n\n", token->line, token->column, token->value);
   exit(0);
 
 }
@@ -243,7 +247,9 @@ void next_state_cmd_machine(Token *token) {
     return;
   }
 
-  printf("Erro sintatico [%d:%d] - token '%s' inesperado.\n\n", token->line, token->column, token->value);
+  printf("\n\n** Erro Sintatico **\n");
+  printf("--------------------\n");
+  printf("input.txt[%d:%d] ~> Token '%s' inesperado.\n\n", token->line, token->column, token->value);
   exit(0);
 }
 
@@ -277,7 +283,9 @@ void next_state_p_machine(Token *token) {
     return;
   }
 
-  printf("Erro sintatico [%d:%d] - token '%s' inesperado.\n\n", token->line, token->column, token->value);
+  printf("\n\n** Erro Sintatico **\n");
+  printf("--------------------\n");
+  printf("input.txt[%d:%d] ~> Token '%s' inesperado.\n\n", token->line, token->column, token->value);
   exit(0);
 }
 
