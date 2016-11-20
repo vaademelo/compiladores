@@ -14,3 +14,5 @@ typedef struct {
 } Token;
 
 Token* get_next_token(void);
+
+Token* lookahead(int k);

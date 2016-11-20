@@ -1,4 +1,5 @@
 #define MAX_MACHINE_TABLE_SIZE 60
+
 #define P_MACHINE 1
 #define CMD_MACHINE 2
 #define EXP_A_MACHINE 3

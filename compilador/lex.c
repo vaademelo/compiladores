@@ -25,7 +25,7 @@ Token* get_next_token(void) {
   Token *token;
   int current_state = 0;
   int previous_state = -1;
-  int ch, lookahead;
+  int ch;
 
   char buffer[MAX_TOKEN_VALUE_SIZE];
   int buffer_size_counter = 0;
@@ -78,4 +78,25 @@ Token* get_next_token(void) {
   } while ( ch != EOF);
 
   return NULL;
+}
+
+Token* lookahead(int k) {
+  Token *token;
+  int i;
+
+  // We start by getting the position of file reading cursor so we can return to the same
+  // point at the end of this function.
+  fgetpos(input_file, &cursor_previous_position);
+
+  // Then we perform a loop k times, once we are looking for the token k positions
+  // ahead.
+  for (i = 0 ; i < k ; i++) {
+    // At this point the program asks for a token
+    token = get_next_token();
+  }
+
+  // Finally we restore the position of the file reading cursor.
+  fsetpos(input_file, &cursor_previous_position);
+
+  return token;
 }

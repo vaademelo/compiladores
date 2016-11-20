@@ -1,6 +1,6 @@
-Para compilar o projeto do analisador léxico execute o script:
+Para compilar o projeto do execute o script:
 
-$ ./compile
+$ ./compilar.sh
 
 O resultado da compilação pode ser encontrado em 'output'.
 
