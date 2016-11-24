@@ -62,7 +62,7 @@ void open_input_file(void) {
   input_file = fopen("input.txt", "r");
 }
 
-void setup_lexical_analizer(void) {
+void setup_lexical_analyser(void) {
   open_input_file();
   setup_next_state_table();
   setup_reserved_words_list();

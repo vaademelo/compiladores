@@ -10,4 +10,4 @@ extern List *reserved_words_list;
 
 extern List *types_list;
 
-void setup_lexical_analizer(void);
+void setup_lexical_analyser(void);

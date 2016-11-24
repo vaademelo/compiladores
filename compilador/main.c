@@ -3,11 +3,15 @@
 #include "lex_setup.h"
 #include "sint_setup.h"
 #include "sint.h"
+#include "symbols_table.h"
+#include "sem.h"
 
 int main(void) {
 
-  setup_lexical_analizer();
-  setup_syntactic_analizer();
+  setup_lexical_analyser();
+  setup_syntactic_analyser();
+  setup_semantic_analyzer();
+  setup_scopes();
   
   syntactic_analysis();
 

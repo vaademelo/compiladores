@@ -19,4 +19,4 @@ extern Machine *exp_a;
 
 extern Machine *exp_b;
 
-void setup_syntactic_analizer(void);
+void setup_syntactic_analyser(void);

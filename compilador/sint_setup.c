@@ -31,7 +31,7 @@ void setup_machine(Machine *m, FILE *machine_file) {
   }
 }
 
-void setup_syntactic_analizer(void) {
+void setup_syntactic_analyser(void) {
   p     = (Machine*)malloc(sizeof(Machine));
   cmd   = (Machine*)malloc(sizeof(Machine));
   exp_a = (Machine*)malloc(sizeof(Machine));

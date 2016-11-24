@@ -1,4 +1,4 @@
-deftipo deftipo {
+deftipo registro {
   caracter autor[50];
   caracter titulo[50];
   inteiro   idLivro;

@@ -4,6 +4,9 @@
 #define EXP_B_MACHINE 4
 #define STACK_SIZE 100
 
+#define VAR 0
+#define FUNC 1
+
 typedef struct {
   int machine;
   int state;

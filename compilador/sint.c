@@ -3,10 +3,14 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <string.h>
+
 #include "sint.h"
 #include "sint_setup.h"
 #include "lex.h"
 #include "lex_setup.h"
+#include "sem.h"
+#include "symbols_table.h"
+
 
 stack_cell *stack[STACK_SIZE];
 int stack_pointer = 0;
@@ -309,6 +313,7 @@ void next_state(Token *token) {
       break;
   }
 }
+
 void preserve_token_on_pop(Token *token){
   if (machine_popped){
     machine_popped = false;
@@ -330,6 +335,8 @@ void syntactic_analysis(void) {
 
     token = get_next_token();
     next_state(token);
+
+    semantic_action(token, current_machine->id, current_state);
 
     preserve_token_on_pop(token);
   }
