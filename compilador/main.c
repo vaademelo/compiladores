@@ -3,7 +3,7 @@
 #include "lex_setup.h"
 #include "sint_setup.h"
 #include "sint.h"
-#include "symbols_table.h"
+#include "symbol_table.h"
 #include "sem.h"
 
 int main(void) {

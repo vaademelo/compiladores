@@ -26,10 +26,21 @@ func principal():vazio {
 
   torne i := 0;
   enquanto (i < 10) {
+    enquanto (i > 3) {
+      imprimir(teste);
+    }
     se (i%2 == 0) {
       imprimir(fundacao);
+      torne i := (32 + 4) * (12 + 5);
+      se(i == 3) {
+        imprimir(abobrinha);
+      } senao {
+        imprimir(morango);
+      }
     }
-		senaose (i%2 == 0) {
+		se (i%2 == 0) {
+      imprimir(hhgttg);
+    } senao {
       imprimir(hhgttg);
     }
     torne i := i + 1;

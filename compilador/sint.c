@@ -9,7 +9,7 @@
 #include "lex.h"
 #include "lex_setup.h"
 #include "sem.h"
-#include "symbols_table.h"
+#include "symbol_table.h"
 
 
 stack_cell *stack[STACK_SIZE];
@@ -328,15 +328,15 @@ void syntactic_analysis(void) {
   Token *token;
   change_machine(P_MACHINE, 0);
 
-  while(1) {
+  while(token != NULL) {
     // if (is_accepting_state(current_machine, current_state) && stack_pointer == 0) {
     //   return;
     // }
 
     token = get_next_token();
-    next_state(token);
 
     semantic_action(token, current_machine->id, current_state);
+    next_state(token);
 
     preserve_token_on_pop(token);
   }

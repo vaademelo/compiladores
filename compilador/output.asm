@@ -1,6 +1,3 @@
-MAIN JP /0000
-HM /00
-#  P
 
 ; ** Subrotina imprimeAutor
 imprimeAutor JP /0000 ; Guarda o endereco de retorno para a rotina anterior
@@ -8,4 +5,42 @@ imprimeAutor JP /0000 ; Guarda o endereco de retorno para a rotina anterior
 ; ** Subrotina principal
 principal JP /0000 ; Guarda o endereco de retorno para a rotina anterior
 
-LACO00 LD /0000
+ENQUANTO00 LD /0000
+<calcula EXP_B>
+JN FIM_ENQUANTO00
+JZ FIM_ENQUANTO00
+
+ENQUANTO01 LD /0000
+<calcula EXP_B>
+JN FIM_ENQUANTO01
+JZ FIM_ENQUANTO01
+
+JP ENQUANTO01
+FIM_ENQUANTO01
+
+SE00 LD /0000
+<calcula EXP_B>
+JN FIM_SE00
+JZ FIM_SE00
+
+SE01 LD /0000
+<calcula EXP_B>
+JN FIM_SE01
+JZ FIM_SE01
+JP FIM_SENAO01
+FIM_SE01
+FIM_SENAO01
+FIM_SE00
+
+SE02 LD /0000
+<calcula EXP_B>
+JN FIM_SE02
+JZ FIM_SE02
+JP FIM_SENAO02
+FIM_SE02
+FIM_SENAO02
+FIM_SE01
+FIM_SE00
+
+JP ENQUANTO00
+FIM_ENQUANTO00

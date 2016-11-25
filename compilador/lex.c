@@ -9,8 +9,8 @@
 FILE *input_file;
 fpos_t cursor_current_position;
 fpos_t cursor_previous_position;
-int file_curent_line = 1;
-int file_curent_column = 1;
+int file_current_line = 1;
+int file_current_column = 1;
 
 int next_state_table[MAX_NEXT_STATE_TABLE_SIZE][MAX_NEXT_STATE_TABLE_SIZE];
 
@@ -31,18 +31,18 @@ Token* get_next_token(void) {
   int buffer_size_counter = 0;
 
   token = (Token*)malloc(sizeof(Token));
-  token->line = file_curent_line;
+  token->line = file_current_line;
 
   do {
     fgetpos(input_file, &cursor_previous_position);
 
     ch = getc(input_file);
-    file_curent_column++;
+    file_current_column++;
 
     if (buffer_size_counter == 0 && (ch == 13 || ch == 10)) {
-      file_curent_line++;
-      file_curent_column = 1;
-      token->line = file_curent_line;
+      file_current_line++;
+      file_current_column = 1;
+      token->line = file_current_line;
     }
 
     if (buffer_size_counter == 0 && is_layout_char(ch)){
@@ -57,8 +57,8 @@ Token* get_next_token(void) {
       buffer_size_counter++;
     } else {
       buffer[buffer_size_counter] = '\0';
-      file_curent_column--;
-      token->column = file_curent_column - buffer_size_counter;
+      file_current_column--;
+      token->column = file_current_column - buffer_size_counter;
       token->class = classify_token(previous_state, current_state, buffer);
       strcpy(token->value, buffer);
       fsetpos(input_file, &cursor_previous_position);
@@ -83,10 +83,13 @@ Token* get_next_token(void) {
 Token* lookahead(int k) {
   Token *token;
   int i;
+  int saved_file_current_line = file_current_line;
+  int saved_file_current_column = file_current_column;  
+  fpos_t saved_cursor_previous_position;
 
   // We start by getting the position of file reading cursor so we can return to the same
   // point at the end of this function.
-  fgetpos(input_file, &cursor_previous_position);
+  fgetpos(input_file, &saved_cursor_previous_position);
 
   // Then we perform a loop k times, once we are looking for the token k positions
   // ahead.
@@ -96,7 +99,9 @@ Token* lookahead(int k) {
   }
 
   // Finally we restore the position of the file reading cursor.
-  fsetpos(input_file, &cursor_previous_position);
+  fsetpos(input_file, &saved_cursor_previous_position);
+  file_current_line = saved_file_current_line;
+  file_current_column = saved_file_current_column;
 
   return token;
 }
