@@ -4,15 +4,17 @@ deftipo registro {
   inteiro   idLivro;
 } Livro;
 
-func imprimeAutor(livro:Livro):vazio {
+func imprimeAutor(par1:Livro, par2:Livro, par3:Livro):vazio {
+ seja olivaras um inteiro;
+ torne olivaras := 35;
  imprimir(livro.autor);
  imprimir(livro.titulo);
 }
 
 func principal():vazio {
-  seja i um inteiro;
-  seja hhgttg um Livro;
-  seja fundacao um Livro;
+  seja i um augusto;
+  seja hhgttg um roberto;
+  seja fundacao um silas;
 
 
   torne fundacao.autor := "Isaac Asimov";
@@ -30,8 +32,10 @@ func principal():vazio {
       imprimir(teste);
     }
     se (i%2 == 0) {
-      imprimir(fundacao);
-      torne i := (32 + 4) * (12 + 5);
+      torne i := imprimeAutor(tap,flap,larry);
+      se (i%2 == 0){
+        torne i := (32 + 4) * (12 + 5);
+      }
       se(i == 3) {
         imprimir(abobrinha);
       } senao {
@@ -43,6 +47,6 @@ func principal():vazio {
     } senao {
       imprimir(hhgttg);
     }
-    torne i := i + 1;
+    torne i := "lenda";
   }
 }

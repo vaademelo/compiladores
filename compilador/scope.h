@@ -21,4 +21,6 @@ void push_scope(Scope *scope);
 
 Scope* pop_scope();
 
+void create_scope(int type);
+
 void setup_scopes(void);
