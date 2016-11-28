@@ -1,18 +1,22 @@
+#define OPERAND_STACK  0
+#define OPERATOR_STACK 1
+
 #define OPERAND_VAR  0
 #define OPERAND_FUNC 1
 #define OPERAND_NUMB 2
 
-typedef struct operand {
+typedef struct stack_node {
   
-  operand* previous_operand;
-  operand* next_operand;
+  struct stack_node* previous_node;
+  struct stack_node* next_node;
 
   char* lexeme[MAX_TOKEN_VALUE_SIZE];
-  int   type; // Tipo de operando
-} Operand;
+  int   type; 
+} Stack_node;
 
-extern Operand* operand_stack;
-extern FILE *output_file;
+extern Stack_node* last_operand;
+extern Stack_node* last_operator;
+extern FILE* output_file;
 
 void semantic_action(Token *token, int machine, int state);
 

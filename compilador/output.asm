@@ -9,6 +9,20 @@ LV =3
 MM VAR_DESLOCAMENTO
 SC INSERIR_VAR_NO_QUADRO
 
+; Inserindo argumento 4 no quadro.
+LV <livro>
+MM VAR_VALOR
+LV 4
+MM VAR_DESLOCAMENTO
+SC INSERIR_VAR_NO_QUADRO
+
+; Inserindo argumento 5 no quadro.
+LV <livro>
+MM VAR_VALOR
+LV 5
+MM VAR_DESLOCAMENTO
+SC INSERIR_VAR_NO_QUADRO
+
 ; ** Subrotina principal
 principal JP /0000 ; Guarda o endereco de retorno para a rotina anterior
 
@@ -63,33 +77,53 @@ SC INSERIR_VAR_NO_QUADRO
 
 ENQUANTO00 LD /0000
 
-; Lendo valor da variavel (i) do quadro
-LV =0
+; Inserindo argumento 3 no quadro.
+LV <iguana>
+MM VAR_VALOR
+LV 3
 MM VAR_DESLOCAMENTO
-SC LER_VAR_DO_QUADRO
+SC INSERIR_VAR_NO_QUADRO
+
+; Inserindo argumento 4 no quadro.
+LV <iguana>
+MM VAR_VALOR
+LV 4
+MM VAR_DESLOCAMENTO
+SC INSERIR_VAR_NO_QUADRO
+SC 
 <calcula EXP_B>
 JN FIM_ENQUANTO00
 JZ FIM_ENQUANTO00
 
 ENQUANTO01 LD /0000
 
-; Lendo valor da variavel (i) do quadro
-LV =0
+; Inserindo argumento 5 no quadro.
+LV <i>
+MM VAR_VALOR
+LV 5
 MM VAR_DESLOCAMENTO
-SC LER_VAR_DO_QUADRO
+SC INSERIR_VAR_NO_QUADRO
 <calcula EXP_B>
 JN FIM_ENQUANTO01
 JZ FIM_ENQUANTO01
 
+; Inserindo argumento 6 no quadro.
+LV <teste>
+MM VAR_VALOR
+LV 6
+MM VAR_DESLOCAMENTO
+SC INSERIR_VAR_NO_QUADRO
+SC _NULL
+
 JP ENQUANTO01
 FIM_ENQUANTO01
 
-SE00 LD /0000
-
-; Lendo valor da variavel (i) do quadro
-LV =0
+; Inserindo argumento 7 no quadro.
+LV <i>
+MM VAR_VALOR
+LV 7
 MM VAR_DESLOCAMENTO
-SC LER_VAR_DO_QUADRO
+SC INSERIR_VAR_NO_QUADRO
 <calcula EXP_B>
 JN FIM_SE00
 JZ FIM_SE00
@@ -124,16 +158,9 @@ MM VAR_VALOR
 LV =0
 MM VAR_DESLOCAMENTO
 SC INSERIR_VAR_NO_QUADRO
-
-SE01 LD /0000
-
-; Lendo valor da variavel (i) do quadro
-LV =0
-MM VAR_DESLOCAMENTO
-SC LER_VAR_DO_QUADRO
 <calcula EXP_B>
-JN FIM_SE01
-JZ FIM_SE01
+JN FIM_SE00
+JZ FIM_SE00
 
 ; Inserindo valor da variavel (i) no quadro
 <CALCULA EXP_A>
@@ -141,34 +168,66 @@ MM VAR_VALOR
 LV =0
 MM VAR_DESLOCAMENTO
 SC INSERIR_VAR_NO_QUADRO
-FIM_SE01
+FIM_SE00
 
-SE02 LD /0000
-
-; Lendo valor da variavel (i) do quadro
-LV =0
+; Inserindo argumento 3 no quadro.
+LV <i>
+MM VAR_VALOR
+LV 3
 MM VAR_DESLOCAMENTO
-SC LER_VAR_DO_QUADRO
+SC INSERIR_VAR_NO_QUADRO
 <calcula EXP_B>
-JN FIM_SE02
-JZ FIM_SE02
-JP FIM_SENAO02
-FIM_SE02
-FIM_SENAO02
-FIM_SE01
+JN FIM_SE-1
+JZ FIM_SE-1
 
-SE03 LD /0000
-
-; Lendo valor da variavel (i) do quadro
-LV =0
+; Inserindo argumento 4 no quadro.
+LV <abobrinha>
+MM VAR_VALOR
+LV 4
 MM VAR_DESLOCAMENTO
-SC LER_VAR_DO_QUADRO
+SC INSERIR_VAR_NO_QUADRO
+SC _NULL
+JP FIM_SENAO-1
+FIM_SE-1
+
+; Inserindo argumento 5 no quadro.
+LV <morango>
+MM VAR_VALOR
+LV 5
+MM VAR_DESLOCAMENTO
+SC INSERIR_VAR_NO_QUADRO
+SC _NULL
+FIM_SENAO-1
+FIM_SE-2
+
+; Inserindo argumento 6 no quadro.
+LV <i>
+MM VAR_VALOR
+LV 6
+MM VAR_DESLOCAMENTO
+SC INSERIR_VAR_NO_QUADRO
 <calcula EXP_B>
-JN FIM_SE03
-JZ FIM_SE03
-JP FIM_SENAO03
-FIM_SE03
-FIM_SENAO03
+JN FIM_SE-3
+JZ FIM_SE-3
+
+; Inserindo argumento 7 no quadro.
+LV <hhgttg>
+MM VAR_VALOR
+LV 7
+MM VAR_DESLOCAMENTO
+SC INSERIR_VAR_NO_QUADRO
+SC _NULL
+JP FIM_SENAO-3
+FIM_SE-3
+
+; Inserindo argumento 8 no quadro.
+LV <hhgttg>
+MM VAR_VALOR
+LV 8
+MM VAR_DESLOCAMENTO
+SC INSERIR_VAR_NO_QUADRO
+SC _NULL
+FIM_SENAO-3
 
 ; Inserindo valor da variavel (i) no quadro
 <CALCULA EXP_A>
@@ -176,8 +235,3 @@ MM VAR_VALOR
 LV =0
 MM VAR_DESLOCAMENTO
 SC INSERIR_VAR_NO_QUADRO
-FIM_SE02
-FIM_SE01
-
-JP ENQUANTO00
-FIM_ENQUANTO00

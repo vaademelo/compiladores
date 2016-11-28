@@ -416,13 +416,9 @@ void semantic_action(Token * token, int machine, int state) {
   
   bool is_leaving_scope = is_end_of_scope(token, machine, state);
 
-  printf("(t: %s, tc: %d, sc: %d, m: %d, st: %d)\n", token->value, token->class, current_scope->type, machine, state);
+  printf("(t: %s, tc: %d, m: %d, s: %d)\n", token->value, token->class, machine, state);
 
-  // *********************************
-  // *  D E C L A R A C A O   D E   V A R I A V E L
-  // ********************************
-
-  if (machine == CMD_MACHINE && state == 7) {
+  if (machine == CMD_MACHINE && state == 1) { // Declaracao de variavel
     insert_symbol(token->value, 0, VAR, symbol_counter); 
     symbol_counter++;
   } 
@@ -431,7 +427,7 @@ void semantic_action(Token * token, int machine, int state) {
   // *  A T R I B U I C A O   D E   V A L O R 
   // ********************************
 
-  if (machine == CMD_MACHINE && state == 21) {
+  if (machine == CMD_MACHINE && state == 2) {
 
     Symbol_table_row* aux_row = malloc(sizeof(Symbol_table_row));
 
@@ -464,15 +460,15 @@ void semantic_action(Token * token, int machine, int state) {
   // ********************************
 
   // Inserir o lexema da funcao na tabela de simbolos
-  if (machine == P_MACHINE && state == 5) {
+  if (machine == P_MACHINE && state == 2) {
     insert_symbol(token->value, 0, FUNC, NULL);
     function_declaration(token);
     symbol_counter = 0;
   }
 
-  // Inserir parametros da funcao na tabela de simbolos
-  if ((machine == P_MACHINE && state == 9)
-   ) {
+
+  if ((machine == P_MACHINE && state == 7 && strcmp(token->value, ")") != 0)
+   || (machine == P_MACHINE && state == 24)) {
     insert_symbol(token->value, 0, VAR, symbol_counter); 
     symbol_counter++;
   } 
@@ -482,18 +478,24 @@ void semantic_action(Token * token, int machine, int state) {
   // *********************************
 
   // Inicializando o 'if'
-  if (machine == CMD_MACHINE && state == 3) {
+  if ((machine == CMD_MACHINE && state == 13 && strcmp(token->value, "se") == 0)
+   || (machine == CMD_MACHINE && state == 31 && strcmp(token->value, "se") == 0) 
+   || (machine == CMD_MACHINE && state == 37 && strcmp(token->value, "se") == 0) 
+   || (machine == CMD_MACHINE && state == 38 && strcmp(token->value, "se") == 0)) {
+    if_initialize();
     new_scope(IF_SCOPE);
   }
 
   // Gerar o código responsável por escapar do 'then' caso a expressão seja falso
-  if (current_scope->type == IF_SCOPE && machine == CMD_MACHINE && state == 36) {
-    // getchar();
+  if (current_scope->type == IF_SCOPE
+   && machine == EXP_A_MACHINE 
+   && state == 2 && strcmp(token->value, ")") == 0) {
     if_escape();
   }
 
   // Se estiver saindo de um contexto de 'if' entao decrementa else_counter
-  if (machine == CMD_MACHINE && state == 38
+  if (is_leaving_scope 
+   && current_scope->type == IF_SCOPE 
    && (lookahead(1) == NULL || strcmp(lookahead(1)->value, "senao") != 0)) {
 
     if_finalize();
@@ -507,14 +509,13 @@ void semantic_action(Token * token, int machine, int state) {
   // *********************************
 
   // Finalizando o 'if' e inicializa o 'else'
-  if (machine == CMD_MACHINE && state == 30 && strcmp(token->value, "senao") == 0) {
-
+  if (machine == CMD_MACHINE && state == 38 && strcmp(token->value, "senao") == 0) {
     else_initialize();
     new_scope(ELSE_SCOPE);
   }
 
   // Se estiver saindo de um contexto de 'else' entao decrementa else_counter
-  if (current_scope->type == ELSE_SCOPE && machine == CMD_MACHINE && state == 13 && strcmp(token->value, "}") == 0) {
+  if (is_leaving_scope && current_scope->type == ELSE_SCOPE) {
     else_finalize();
     else_counter--;
 
@@ -526,23 +527,25 @@ void semantic_action(Token * token, int machine, int state) {
   // *********************************
 
   // Inicializando o 'while'
-  if (machine == CMD_MACHINE && state == 4) {
+  if ((machine == CMD_MACHINE && state == 13 && strcmp(token->value, "enquanto") == 0)
+   || (machine == CMD_MACHINE && state == 31 && strcmp(token->value, "enquanto") == 0)) {
     while_initialize();
     new_scope(WHILE_SCOPE);
   }
 
   // Gerar o código responsável por escapar do 'while' caso a expressão seja falsa
-  if (current_scope->type == WHILE_SCOPE && machine == CMD_MACHINE && state == 31) {
+  if (current_scope->type == WHILE_SCOPE
+   && machine == EXP_A_MACHINE 
+   && state == 2 && strcmp(token->value, ")") == 0) {
     while_escape();
   }
 
   // Se estiver saindo de um contexto de 'while' entao decrementa while
-  if (current_scope->type == WHILE_SCOPE && machine == CMD_MACHINE && state == 13 && strcmp(token->value, "}") == 0) {
+  if (is_leaving_scope && current_scope->type == WHILE_SCOPE) {
     while_finalize();
     while_end_counter--;
 
     leave_scope();
-    printf("&&&&&&&&&&&&&&&&&&&&&&&&&passei\n");
   }
 
   // *********************************
@@ -550,14 +553,15 @@ void semantic_action(Token * token, int machine, int state) {
   // *********************************
   
   // Inicializando Frame
-  if (machine == EXP_A_MACHINE && state == 1 && token->class == 6 && strcmp(lookahead(1)->value, "(") == 0) {
+  if (machine == CMD_MACHINE && state == 24 && token->class == 6 && strcmp(lookahead(1)->value, "(") == 0) {
     frame_initialize();
     strcpy(current_subroutine_call_lexeme, token->value);
     symbol_counter = 0;
   }  
 
   // Inserindo valor dos parametros no quadro
-  if (machine == EXP_A_MACHINE && state == 1 && strcmp(lookahead(1)->value, "(") != 0) {
+  if ((machine == EXP_A_MACHINE && state == 6)
+   || (machine == EXP_A_MACHINE && state == 25)) {
     
     insert_parameter_into_frame(token);
     symbol_counter++;

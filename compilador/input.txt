@@ -27,14 +27,14 @@ func principal():vazio {
 
 
   torne i := 0;
-  enquanto (i < 10) {
+  enquanto (iguana < iguana) {
     enquanto (i > 3) {
       imprimir(teste);
     }
-    se (i%2 == 0) {
+    se (i%200000 == 0) {
       torne i := imprimeAutor(tap,flap,larry);
-      se (i%2 == 0){
-        torne i := (32 + 4) * (12 + 5);
+      se (1*3+2+5 > (5*(1+2*5))){
+        torne i := (32 + 423) * (120 + 54);
       }
       se(i == 3) {
         imprimir(abobrinha);

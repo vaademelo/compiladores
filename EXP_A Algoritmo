@@ -1,0 +1,42 @@
+1*3+2 > (5*(1+2*5))
+
+1 - Verifico o ultimo operador, se for '(' retiro ele da lista.
+2 - faço i = 0
+3 - verifico o operando anterior:
+  - se for 'NULL' ou 'operador lógico' ou '(' utilizo a ultima operação.
+  - se for 'operador de maior precedencia' realizo a operacao deslocada de i operandos e operacao e gravo o 
+    resultado em um temporario
+  - caso contrario i++ e volta para o passo 2
+4 - caso ache um operador de maior precedencia gravo a operacao
+
+
+is_logic_operator()
+
+opn  op
+1    *
+3    +
+2    >
+5    (
+1    *
+2    (
+5    +
+     *
+
+LV =2
+MM T1
+LV =5
+*  T1
+MM T1
+
+opn  op
+1    *
+3    +
+2    >
+5    (
+1    *
+T1   (
+     +
+
+   
+
+

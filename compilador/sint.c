@@ -335,9 +335,9 @@ void syntactic_analysis(void) {
 
     token = get_next_token();
 
-    semantic_action(token, current_machine->id, current_state);
     next_state(token);
-
     preserve_token_on_pop(token);
+
+    semantic_action(token, current_machine->id, current_state);
   }
 }
