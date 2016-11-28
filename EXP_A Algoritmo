@@ -1,4 +1,4 @@
-1*3+2 > (5*(1+2*5))
+1*3+2+5 > (5*(1+2*5)) || 
 
 1 - Verifico o ultimo operador, se for '(' retiro ele da lista.
 2 - faço i = 0
@@ -13,14 +13,41 @@
 is_logic_operator()
 
 opn  op
-1    *
-3    +
-2    >
+
+NULL NULL
+T2   >
+
+
+TO + 2 = T1
+
+NULL - T1 - 5
+
+NULL - +
+     >
 5    (
 1    *
 2    (
 5    +
-     *
+     * -
+
+=-=-=-=-=--=-=-=
+NULL NULL
+1    *
+3    + -
+2 -   
+
+
+
+     >
+5    (
+1    *
+2    (
+5    +
+     * -
+
+
+
+
 
 LV =2
 MM T1
@@ -35,7 +62,7 @@ opn  op
 5    (
 1    *
 T1   (
-     +
+     + -
 
    
 
